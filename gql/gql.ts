@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  #graphql\n  query VerifyUserGoogleToken($token: String!) {\n    verifyGoogleToken(token: $token)\n  }\n": types.VerifyUserGoogleTokenDocument,
+    "\n\t#graphql\n\tquery VerifyUserGoogleToken($token: String!) {\n\t\tverifyGoogleToken(token: $token)\n\t}\n": types.VerifyUserGoogleTokenDocument,
+    "\n\tquery GetCurrentUser {\n\t\tgetCurrentUser {\n\t\t\tid\n\t\t\tprofileImageURL\n\t\t\temail\n\t\t\tfirstName\n\t\t\tlastName\n\t\t}\n\t}\n": types.GetCurrentUserDocument,
 };
 
 /**
@@ -33,7 +34,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  #graphql\n  query VerifyUserGoogleToken($token: String!) {\n    verifyGoogleToken(token: $token)\n  }\n"): (typeof documents)["\n  #graphql\n  query VerifyUserGoogleToken($token: String!) {\n    verifyGoogleToken(token: $token)\n  }\n"];
+export function graphql(source: "\n\t#graphql\n\tquery VerifyUserGoogleToken($token: String!) {\n\t\tverifyGoogleToken(token: $token)\n\t}\n"): (typeof documents)["\n\t#graphql\n\tquery VerifyUserGoogleToken($token: String!) {\n\t\tverifyGoogleToken(token: $token)\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery GetCurrentUser {\n\t\tgetCurrentUser {\n\t\t\tid\n\t\t\tprofileImageURL\n\t\t\temail\n\t\t\tfirstName\n\t\t\tlastName\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GetCurrentUser {\n\t\tgetCurrentUser {\n\t\t\tid\n\t\t\tprofileImageURL\n\t\t\temail\n\t\t\tfirstName\n\t\t\tlastName\n\t\t}\n\t}\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
