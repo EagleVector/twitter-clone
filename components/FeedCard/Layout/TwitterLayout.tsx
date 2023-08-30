@@ -57,7 +57,7 @@ const sidebarMenuItems: TwitterSidebarButton[] = [
 const TwitterLayout: React.FC<TwitterLayoutProps> = props => {
 	const { user } = useCurrentUser();
 
-  const queryClient = useQueryClient();
+	const queryClient = useQueryClient();
 
 	const handleLoginWithGoogle = useCallback(
 		async (cred: CredentialResponse) => {
@@ -82,27 +82,32 @@ const TwitterLayout: React.FC<TwitterLayoutProps> = props => {
 
 	return (
 		<div>
-			<div className="grid grid-cols-12 h-screen w-screen px-36">
-				<div className="col-span-3 pt-8 px-4 relative">
-					<div className="text-4xl h-fit w-fit hover:bg-gray-800 rounded-full p-2 cursor-pointer transition-all">
-						<BsTwitter />
-					</div>
-					<div className="mt-4 text-1xl pr-4">
-						<ul>
-							{sidebarMenuItems.map(item => (
-								<li
-									className="flex justify-start items-center gap-4 hover:bg-gray-800 rounded-full px-3 py-3 w-fit cursor-pointer mt-2"
-									key={item.title}
-								>
-									<span>{item.icon}</span>
-									<span>{item.title}</span>
-								</li>
-							))}
-						</ul>
-						<div className="mt-5 px-3">
-							<button className="bg-[#1d9bf0] font-semibold text-lg py-2 px-4 rounded-full w-full">
-								Tweet
-							</button>
+			<div className="grid grid-cols-12 h-screen w-screen sm:px-36">
+				<div className="col-span-2 sm:col-span-3 pt-1 flex sm:justify-end pr-4 relative">
+					<div>
+						<div className="text-3xl h-fit w-fit hover:bg-gray-800 rounded-full p-4 cursor-pointer transition-all">
+							<BsTwitter />
+						</div>
+						<div className="mt-4 text-1xl pr-4">
+							<ul>
+								{sidebarMenuItems.map(item => (
+									<li
+										className="flex justify-start items-center gap-4 hover:bg-gray-800 rounded-full px-3 py-3 w-fit cursor-pointer mt-2"
+										key={item.title}
+									>
+										<span className='text-3xl'>{item.icon}</span>
+										<span className='hidden sm:inline text-xl'>{item.title}</span>
+									</li>
+								))}
+							</ul>
+							<div className="mt-5 px-3">
+								<button className="hidden sm:block bg-[#1d9bf0] font-semibold text-lg py-2 px-4 rounded-full w-full">
+									Tweet
+								</button>
+								<button className="block sm:hidden bg-[#1d9bf0] font-semibold text-lg py-2 px-4 rounded-full w-full">
+									<BsTwitter />
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -117,17 +122,17 @@ const TwitterLayout: React.FC<TwitterLayoutProps> = props => {
 								width={40}
 							/>
 						)}
-						<div>
+						<div className='hidden sm:block'>
 							<h3 className="text-xl cursor-pointer">
 								{user.firstName} {user.lastName}
 							</h3>
 						</div>
 					</div>
 				)}
-				<div className="col-span-5 border-r-[1px] border-l-[1px] h-screen overflow-scroll border-gray-600">
+				<div className="col-span-10 sm:col-span-5 border-r-[1px] border-l-[1px] h-screen overflow-scroll border-gray-600">
 					{props.children}
 				</div>
-				<div className="col-span-4 p-5">
+				<div className="col-span-0 sm:col-span-3 p-5">
 					{!user && (
 						<div className="p-5 bg-slate-800 rounded-lg">
 							<h1 className="my-2 text-xl">New To Twitter?</h1>
