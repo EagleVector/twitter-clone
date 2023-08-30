@@ -13,6 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n  #graphql\n  mutation CreateTweet($payload: CreateTweetData!) {\n    createTweet(payload: $payload) {\n      id\n    }\n  }\n": types.CreateTweetDocument,
+    "\n\tquery GetAllTweets {\n\t\tgetAllTweets {\n\t\t\tid\n      content\n      imageURL\n\t\t\tauthor {\n        firstName\n        lastName\n        profileImageURL\n      }\n\t\t}\n\t}\n": types.GetAllTweetsDocument,
     "\n\t#graphql\n\tquery VerifyUserGoogleToken($token: String!) {\n\t\tverifyGoogleToken(token: $token)\n\t}\n": types.VerifyUserGoogleTokenDocument,
     "\n\tquery GetCurrentUser {\n\t\tgetCurrentUser {\n\t\t\tid\n\t\t\tprofileImageURL\n\t\t\temail\n\t\t\tfirstName\n\t\t\tlastName\n\t\t}\n\t}\n": types.GetCurrentUserDocument,
 };
@@ -31,6 +33,14 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  #graphql\n  mutation CreateTweet($payload: CreateTweetData!) {\n    createTweet(payload: $payload) {\n      id\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  mutation CreateTweet($payload: CreateTweetData!) {\n    createTweet(payload: $payload) {\n      id\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery GetAllTweets {\n\t\tgetAllTweets {\n\t\t\tid\n      content\n      imageURL\n\t\t\tauthor {\n        firstName\n        lastName\n        profileImageURL\n      }\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GetAllTweets {\n\t\tgetAllTweets {\n\t\t\tid\n      content\n      imageURL\n\t\t\tauthor {\n        firstName\n        lastName\n        profileImageURL\n      }\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
