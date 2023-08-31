@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { BiMessageRounded, BiRepost, BiBarChart, BiUpload } from 'react-icons/bi';
 import { BsHeart } from 'react-icons/bs';
 import { Tweet } from "@/gql/graphql";
+import Link from "next/link";
 
 interface FeedCardProps {
   data: Tweet
@@ -25,7 +26,11 @@ const FeedCard: React.FC<FeedCardProps> = (props) => {
           />}
         </div>
         <div className="col-span-11">
-          <h5>{data.author?.firstName} {data.author?.lastName}</h5>
+          <h5>
+            <Link href={`/${data.author?.id}`}>
+              {data.author?.firstName} {data.author?.lastName}
+            </Link>
+          </h5>
           <p>{data.content}</p>
           <div className="flex justify-between mt-5 text-xl items-center p-2 w-[85%]">
             <div>
