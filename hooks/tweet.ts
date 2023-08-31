@@ -1,5 +1,4 @@
 import { graphqlClient } from "@/clients/api"
-import { graphql } from "@/gql"
 import { CreateTweetData } from "@/gql/graphql"
 import { createTweetMutation } from "@/graphql/mutation/tweet"
 import { getAllTweetsQuery } from "@/graphql/query/tweet"
