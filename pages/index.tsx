@@ -1,17 +1,21 @@
 import Image from 'next/image';
-import {
-	BiImageAlt
-} from 'react-icons/bi';
+import { BiImageAlt } from 'react-icons/bi';
 import FeedCard from '@/components/FeedCard';
 import { useCallback, useState } from 'react';
 import { useCurrentUser } from '@/hooks/user';
-import { useCreateTweet, useGetAllTweets } from '@/hooks/tweet';
+import { useCreateTweet} from '@/hooks/tweet';
 import { Tweet } from '@/gql/graphql';
 import TwitterLayout from '@/components/FeedCard/Layout/TwitterLayout';
+import { graphqlClient } from '@/clients/api';
+import { getAllTweetsQuery } from '@/graphql/query/tweet';
+import { GetServerSideProps } from 'next';
 
-export default function Home() {
+interface HomeProps {
+	tweets?: Tweet[]
+}
+
+export default function Home( props: HomeProps ) {
 	const { user } = useCurrentUser();
-	const { tweets = [] } = useGetAllTweets();
 	const { mutate } = useCreateTweet();
 
 	const [content, setContent] = useState('');
@@ -65,10 +69,20 @@ export default function Home() {
 						</div>
 					</div>
 					{
-						tweets?.map((tweet) =>
+						props.tweets?.map((tweet) =>
 							tweet ? <FeedCard key={tweet?.id} data={tweet as Tweet} /> : null 
 						)}
 			</TwitterLayout>
 		</div>
 	)
+}
+
+export const getServerSideProps: GetServerSideProps<HomeProps> = async(context) => {
+  const allTweets = await graphqlClient.request(getAllTweetsQuery);
+
+  return {
+    props: {
+      tweets: allTweets.getAllTweets as Tweet[]
+    }
+  }
 }
