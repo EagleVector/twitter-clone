@@ -18,7 +18,7 @@ interface TwitterLayoutProps {
 interface TwitterSidebarButton {
 	title: string;
 	icon: React.ReactNode;
-	link: string
+	link: string;
 }
 
 const TwitterLayout: React.FC<TwitterLayoutProps> = props => {
@@ -26,48 +26,49 @@ const TwitterLayout: React.FC<TwitterLayoutProps> = props => {
 
 	const sidebarMenuItems: TwitterSidebarButton[] = useMemo(
 		() => [
-	{
-		title: 'Home',
-		icon: <BiHomeCircle />,
-		link: '/'
-	},
-	{
-		title: 'Explore',
-		icon: <BiHash />,
-		link: '/'
-	},
-	{
-		title: 'Notifications',
-		icon: <BsBell />,
-		link: '/'
-	},
-	{
-		title: 'Messages',
-		icon: <BsEnvelope />,
-		link: '/'
-	},
-	{
-		title: 'Bookmarks',
-		icon: <BsBookmark />,
-		link: '/'
-	},
-	{
-		title: 'Monetization',
-		icon: <BiMoney />,
-		link: '/'
-	},
-	{
-		title: 'Profile',
-		icon: <BiUser />,
-		link: `/${user?.id}`
-	},
-	{
-		title: 'More Options',
-		icon: <CiCircleMore />,
-		link: '/'
-	}
-],
-[user?.id]);
+			{
+				title: 'Home',
+				icon: <BiHomeCircle />,
+				link: '/'
+			},
+			{
+				title: 'Explore',
+				icon: <BiHash />,
+				link: '/'
+			},
+			{
+				title: 'Notifications',
+				icon: <BsBell />,
+				link: '/'
+			},
+			{
+				title: 'Messages',
+				icon: <BsEnvelope />,
+				link: '/'
+			},
+			{
+				title: 'Bookmarks',
+				icon: <BsBookmark />,
+				link: '/'
+			},
+			{
+				title: 'Monetization',
+				icon: <BiMoney />,
+				link: '/'
+			},
+			{
+				title: 'Profile',
+				icon: <BiUser />,
+				link: `/${user?.id}`
+			},
+			{
+				title: 'More Options',
+				icon: <CiCircleMore />,
+				link: '/'
+			}
+		],
+		[user?.id]
+	);
 
 	const queryClient = useQueryClient();
 
@@ -103,14 +104,15 @@ const TwitterLayout: React.FC<TwitterLayoutProps> = props => {
 						<div className="mt-4 text-1xl pr-4">
 							<ul>
 								{sidebarMenuItems.map(item => (
-									<li
-										key={item.title}
-									>
-										<Link 
-											className="flex justify-start items-center gap-4 hover:bg-gray-800 rounded-full px-3 py-3 w-fit cursor-pointer mt-2" 
-											href={item.link}>
-											<span className='text-3xl'>{item.icon}</span>
-											<span className='hidden sm:inline text-xl'>{item.title}</span>
+									<li key={item.title}>
+										<Link
+											className="flex justify-start items-center gap-4 hover:bg-gray-800 rounded-full px-3 py-3 w-fit cursor-pointer mt-2"
+											href={item.link}
+										>
+											<span className="text-3xl">{item.icon}</span>
+											<span className="hidden sm:inline text-xl">
+												{item.title}
+											</span>
 										</Link>
 									</li>
 								))}
@@ -137,7 +139,7 @@ const TwitterLayout: React.FC<TwitterLayoutProps> = props => {
 								width={40}
 							/>
 						)}
-						<div className='hidden sm:block'>
+						<div className="hidden sm:block">
 							<h3 className="text-xl cursor-pointer">
 								{user.firstName} {user.lastName}
 							</h3>
