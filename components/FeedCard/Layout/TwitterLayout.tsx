@@ -150,10 +150,38 @@ const TwitterLayout: React.FC<TwitterLayoutProps> = props => {
 					{props.children}
 				</div>
 				<div className="col-span-0 sm:col-span-3 p-5">
-					{!user && (
+					{!user ? (
 						<div className="p-5 bg-slate-800 rounded-lg">
 							<h1 className="my-2 text-xl">New To Twitter?</h1>
 							<GoogleLogin onSuccess={handleLoginWithGoogle} />
+						</div>
+					) : (
+						<div className="px-4 py-3 bg-slate-800 rounded-lg">
+							<h1 className="my-2 text-xl">People You May Know</h1>
+							{
+								user?.recommendedUsers?.map((el) => 
+									<div className='flex items-center gap-3 mt-5 mb-3' key={el?.id}>
+										{el?.profileImageURL && (
+											<Image
+												src={el?.profileImageURL}
+												className="rounded-full"
+												alt="user-image"
+												width={60}
+												height={60}
+											/>
+										)}
+										<div className='text-lg ml-2'>
+											<div className='mb-2'>
+												{el?.firstName} {el?.lastName}
+											</div>
+											<Link 
+											href={`/${el?.id}`} 
+											className='bg-[#1d9bf0] text-white py-1 px-4 w-full rounded-lg'>
+												View
+											</Link>
+										</div>
+									</div>
+								)}
 						</div>
 					)}
 				</div>
