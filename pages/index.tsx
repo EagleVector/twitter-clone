@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { BiImageAlt } from 'react-icons/bi';
 import FeedCard from '@/components/FeedCard';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useCurrentUser } from '@/hooks/user';
 import { useCreateTweet, useGetAllTweets } from '@/hooks/tweet';
 import { Tweet } from '@/gql/graphql';
